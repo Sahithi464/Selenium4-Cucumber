@@ -10,7 +10,7 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.16.1</version>
+      <version>4.17.0</version>
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
@@ -42,14 +42,44 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.14.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.8.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>net.masterthought</groupId>
-      <artifactId>cucumber-reporting</artifactId>
-      <version>5.7.8</version>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-testng</artifactId>
+      <version>7.15.0</version>
+      <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.12</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -67,9 +97,21 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.0</version>
         <configuration>
-          <parallel>methods</parallel>
-          <threadCount>4</threadCount>
+          <testFailureIgnore>true</testFailureIgnore>
+          <properties>
+            <property>
+              <name>dataproviderthreadcount</name>
+              <value>4</value>
+            </property>
+          </properties>
         </configuration>
+        <!--<configuration>
+          <includes>
+           **/RunCucumberTest.java
+          </includes>
+          <parallel>classesAndMethods</parallel>
+          <threadCount>4</threadCount>
+        </configuration>-->
       </plugin>
       <plugin>
         <groupId>net.masterthought</groupId>
@@ -78,19 +120,18 @@
         <executions>
           <execution>
             <id>execution</id>
-            <phase>verify</phase>
+            <phase>test</phase>
             <goals>
               <goal>generate</goal>
             </goals>
             <configuration>
               <!-- Set the path to your Cucumber JSON report -->
-              <projectName>Selenium4</projectName>
-              <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+              <projectName>Sample</projectName>
+              <outputDirectory>${project.build.directory}</outputDirectory>
               <inputDirectory>${project.build.directory}</inputDirectory>
-               <jsonFiles>
-                 <param>**/*.json</param>
-               </jsonFiles>
-              <!-- Other optional configurations -->
+              <jsonFiles>
+                <param>**/*.json</param>
+              </jsonFiles>
             </configuration>
           </execution>
         </executions>

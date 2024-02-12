@@ -26,15 +26,13 @@ public class DriverManager {
 
     public static void createDriver (Browser browser) {
         switch (browser) {
-            case FIREFOX -> setupFirefoxDriver ();
-            default -> setupChromeDriver ();
+            case FIREFOX:
+                setupFirefoxDriver ();
+                break;
+            case CHROME:
+                setupChromeDriver();
+                break;
         }
-       /* if(browser.equals(Browser.FIREFOX.toString())){
-            setupFirefoxDriver ();
-        }
-        else{
-            setupChromeDriver ();
-        }*/
         setupBrowserTimeouts ();
     }
 
@@ -75,14 +73,14 @@ public class DriverManager {
         if (isHeadless) {
             options.addArguments (HEADLESS);
         }
+
         options.addArguments ("--safebrowsing-disable-download-protection");
         options.setExperimentalOption ("prefs", chromePrefs);
-        WebDriver driver = new ChromeDriver(options);
-        setDriver(driver);
-        driver.manage().window().maximize();
-       /* setDriver (WebDriverManager.chromedriver ()
-                .capabilities (options)
-                .create ());*/
+        //WebDriver driver = new ChromeDriver(options);
+        //setDriver(driver);
+        setDriver(new ChromeDriver(options));
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().window().maximize();
         LOG.info ("Chrome Driver created successfully!");
     }
 
@@ -95,9 +93,6 @@ public class DriverManager {
         //options.addArguments (HEADLESS);
         WebDriver driver = new FirefoxDriver(options);
         setDriver(driver);
-        /*setDriver (WebDriverManager.firefoxdriver ()
-                .capabilities (options)
-                .create ());*/
         LOG.info ("Firefox Driver created successfully!");
     }
 

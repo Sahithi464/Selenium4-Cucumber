@@ -1,3 +1,7 @@
+package locators;
+
+import org.openqa.selenium.By;
+
 /*
 import java.util.ArrayList;
 import java.util.List;
@@ -58,3 +62,15 @@ public class ConfigReader {
 
     // ... other methods
 }*/
+public class LoginLocators {
+
+    public static By blog_link = By.xpath("//div[@id='widget-navbar-217834']/ul/li/a/div/span[contains(text(),'Blog')]");
+
+    public static By MY_ACCOUNT_LINK = By.xpath("//a[@role='button'][normalize-space()='My account']");
+    public static By LOGIN_LINK = By.xpath("//span[normalize-space()='Login']");
+
+    public static By LOGIN_EMAIL_INPUT = By.xpath("//input[@id='input-email']");
+    public static By LOGIN_PASSWORD_INPUT = By.xpath("//input[@id='input-password']");
+
+
+}

@@ -1,8 +1,11 @@
 Feature: Login functionality
-@test
-Scenario: Login with valid credentials
-  Given User has navigated to login page
+@test @Smoke
+Scenario Outline: Login with valid credentials
+  Given User has navigated to the page
+  And  User enters "<username>" and "<password>"
 
-@Smoke
-Scenario: Test wfjdkfj
-  Given User has logged
+  Examples:
+    | username | password |
+    | admin    | test@123 |
+
+

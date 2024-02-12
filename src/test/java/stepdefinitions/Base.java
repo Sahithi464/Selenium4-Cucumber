@@ -9,7 +9,7 @@ public class Base {
     WebDriver driver;
 
     public Base(){
-        super();
+        //super();
         this.driver= getDriver();
     }
 }
